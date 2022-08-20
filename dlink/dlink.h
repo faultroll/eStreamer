@@ -10,7 +10,8 @@ extern "C" {
 
 typedef enum _dl_mod_e_ {
     // common input/output must above 0, for nbds/map defect
-    DL_INPUT = 1,
+    DL_USER = 1,
+    DL_INPUT,
     DL_OUTPUT,
     DL_INOUT, // seems no need to use this
     DL_INNER_BEGIN = 11,
@@ -44,6 +45,7 @@ typedef struct _dl_chn_s_ {
     int grp;
     int chn;
 } DL_ID_S;
+#define DL_ID_EMPTY    { .mod = -1, .grp = -1, .chn = -1, }
 
 typedef enum _dl_speed_e {
     DL_SLOW     = 1,
@@ -54,7 +56,7 @@ typedef enum _dl_speed_e {
 
 typedef void *DL_DATA_T; // generic, cast to user struct
 typedef int (*DL_GEN_F)(DL_ID_S, DL_DATA_T);  // generate outdata
-typedef int (*DL_PROC_F)(DL_ID_S, DL_DATA_T); // process indata
+typedef int (*DL_PROC_F)(DL_ID_S, /* const */ DL_DATA_T); // process indata
 
 typedef struct _dl_des_s_ {
     DL_MOD_E mod;            // module enum

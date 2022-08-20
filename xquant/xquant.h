@@ -2,7 +2,8 @@
 #ifndef _XQUANT_H_
 #define _XQUANT_H_
 
-#include "dlink/dlink.h"
+#include "dlink/dlink.h" // DL_ID_S
+#include "dlink/dlink_cvt.h" // DL_PUB_DATAINFO_S
 
 #if defined(__cplusplus)
 extern "C" {
@@ -26,7 +27,6 @@ typedef enum _xq_chn_oper_e_ {
     // XQ_OPER_EPTZ_CTRL,
     XQ_OPER_BUTT,
 } xq_chn_oper_e;
-#define XQ_ID_EMPTY    { .mod = -1, .grp = -1, .chn = -1, }
 // typedef struct _xq_inchn_hnd_s_ xq_inchn_hnd_s;
 // typedef struct _xq_outchn_hnd_s_ xq_outchn_hnd_s;
 typedef struct _xq_chn_s_ xq_chn_s;
@@ -120,7 +120,7 @@ void xquant_unbind(xq_chn_s *chn1, xq_chn_s *chn2);
 // common param
 typedef struct _xq_callback_s_ {
     void *opaque;
-    int (*dataprocfun)(void *opaque, xq_chn_s *chn, /* const */ XQ_DATAINFO_S *data);
+    int (*dataprocfun)(void *opaque, xq_chn_s *chn, /* const */ DL_PUB_DATAINFO_S *data);
 } xq_callback_s;
 
 // module param
