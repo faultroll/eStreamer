@@ -8,91 +8,91 @@
 extern "C" {
 #endif
 
-typedef enum _elink_mod_e_ {
+typedef enum _el_mod_e_ {
     // common input/output must above 0, for nbds/map defect
-    ELINK_INPUT = 1,
-    ELINK_OUTPUT,
-    ELINK_INOUT, // seems no need to use this
-    ELINK_INNER_BEGIN = 10,
+    EL_INPUT = 1,
+    EL_OUTPUT,
+    EL_INOUT, // seems no need to use this
+    EL_INNER_BEGIN = 11,
     // video modules
-    ELINK_VIN,  // ELINK_VFRAME(out)
-    ELINK_VENC, // ELINK_VFRAME(in)/ELINK_VSTREAM(out)
-    ELINK_VDEC, // ELINK_VSTREAM(in)/ELINK_VFRAME(out)
-    ELINK_VMUL, // ELINK_VFRAME(in/out)
-    ELINK_VMIX, // ELINK_VFRAME(in/out)
-    ELINK_VOUT, // ELINK_VFRAME(in)
+    EL_VIN,  // EL_VFRAME(out)
+    EL_VENC, // EL_VFRAME(in)/EL_VSTREAM(out)
+    EL_VDEC, // EL_VSTREAM(in)/EL_VFRAME(out)
+    EL_VMUL, // EL_VFRAME(in/out)
+    EL_VMIX, // EL_VFRAME(in/out)
+    EL_VOUT, // EL_VFRAME(in)
     // audio modules
-    ELINK_AIN,  // ELINK_AFRAME(out)
-    ELINK_AENC, // ELINK_AFRAME(in)/ELINK_ASTREAM(out)
-    ELINK_ADEC, // ELINK_ASTREAM(out)/ELINK_AFRAME(in)
-    ELINK_AMUL, // ELINK_AFRAME(in/out)
-    ELINK_AMIX, // ELINK_AFRAME(in/out)
-    ELINK_AOUT, // ELINK_AFRAME(in)
-    ELINK_INNER_END = 100,
-} ELINK_MOD_E;
+    EL_AIN,  // EL_AFRAME(out)
+    EL_AENC, // EL_AFRAME(in)/EL_ASTREAM(out)
+    EL_ADEC, // EL_ASTREAM(out)/EL_AFRAME(in)
+    EL_AMUL, // EL_AFRAME(in/out)
+    EL_AMIX, // EL_AFRAME(in/out)
+    EL_AOUT, // EL_AFRAME(in)
+    EL_INNER_END = 100,
+} EL_MOD_E;
 
-typedef enum _elink_type_e {
-    ELINK_VFRAME = 0,  // ELINK_VFRAME and ELINK_VSTREAM is ELINK_NORMAL task
-    ELINK_VSTREAM,
-    ELINK_AFRAME,      // ELINK_AFRAME and ELINK_ASTREAM is ELINK_FAST task
-    ELINK_ASTREAM,
-    ELINK_TYPE_BUTT,
-} ELINK_TYPE_E;
+typedef enum _el_type_e {
+    EL_VFRAME = 0,  // EL_VFRAME and EL_VSTREAM is EL_NORMAL task
+    EL_VSTREAM,
+    EL_AFRAME,      // EL_AFRAME and EL_ASTREAM is EL_FAST task
+    EL_ASTREAM,
+    EL_TYPE_BUTT,
+} EL_TYPE_E;
 
-typedef struct _elink_chn_s_ {
-    ELINK_MOD_E mod;
+typedef struct _el_chn_s_ {
+    EL_MOD_E mod;
     int grp;
     int chn;
-} ELINK_ID_S;
+} EL_ID_S;
 
-typedef enum _elink_speed_e {
-    ELINK_SLOW     = 1,
-    ELINK_NORMAL   = 3,
-    ELINK_FAST     = 5,
-    ELINK_SPEED_BUTT,
-} ELINK_SPEED_E;
+typedef enum _el_speed_e {
+    EL_SLOW     = 1,
+    EL_NORMAL   = 3,
+    EL_FAST     = 5,
+    EL_SPEED_BUTT,
+} EL_SPEED_E;
 
-typedef void *ELINK_DATA_T; // generic, cast to user struct
-typedef int (*ELINK_GEN_F)(ELINK_ID_S, ELINK_DATA_T);  // generate outdata
-typedef int (*ELINK_PROC_F)(ELINK_ID_S, ELINK_DATA_T); // process indata
+typedef void *EL_DATA_T; // generic, cast to user struct
+typedef int (*EL_GEN_F)(EL_ID_S, EL_DATA_T);  // generate outdata
+typedef int (*EL_PROC_F)(EL_ID_S, EL_DATA_T); // process indata
 
-typedef struct _elink_des_s_ {
-    ELINK_MOD_E mod;            // module enum
+typedef struct _el_des_s_ {
+    EL_MOD_E mod;            // module enum
     char        name[16];
     struct {
-        ELINK_SPEED_E  inspeed;     // indata speed, set by user
-        ELINK_TYPE_E   indatatype;  // indata type
-        ELINK_PROC_F   indatafun;   // (outchn) process indata
+        EL_SPEED_E  inspeed;     // indata speed, set by user
+        EL_TYPE_E   indatatype;  // indata type
+        EL_PROC_F   indatafun;   // (outchn) process indata
     };
     struct {
-        ELINK_SPEED_E  outspeed;    // outdata speed, set by user
-        ELINK_TYPE_E   outdatatype; // outdata type
-        ELINK_GEN_F    outdatafun;  // (inchn) generate outdata
-        ELINK_PROC_F   freedatafun; // free after process
+        EL_SPEED_E  outspeed;    // outdata speed, set by user
+        EL_TYPE_E   outdatatype; // outdata type
+        EL_GEN_F    outdatafun;  // (inchn) generate outdata
+        EL_PROC_F   freedatafun; // free after process
     };
-} ELINK_DES_S;
+} EL_DES_S;
 
 
-int elink_init(void);
-int elink_fini(void);
+int el_init(void);
+int el_fini(void);
 // link channels
-int elink_link(ELINK_ID_S from, // src
-               ELINK_ID_S to // dst
-              );
-int elink_unlink(ELINK_ID_S from, // src
-                 ELINK_ID_S to // dst
-                );
-int elink_status(void); // print status
-// modules used by elink_link/elink_unlink
-int elink_create_chn(ELINK_DES_S *des);
-int elink_destroy_chn(int chn);
-int elink_create_inchn(ELINK_GEN_F outdata, // inchn generate outdata
-                       ELINK_TYPE_E outtype,
-                       ELINK_PROC_F freedata
-                      ); // return id(chn)
-int elink_create_outchn(ELINK_PROC_F indata, // outchn process indata
-                        ELINK_TYPE_E intype
-                       );  // return id(chn)
+int el_link(EL_ID_S from, // src
+            EL_ID_S to // dst
+           );
+int el_unlink(EL_ID_S from, // src
+              EL_ID_S to // dst
+             );
+int el_status(void); // print status
+// modules used by el_link/el_unlink
+int el_create_chn(EL_DES_S *des);
+int el_destroy_chn(int chn);
+int el_create_inchn(EL_GEN_F outdata, // inchn generate outdata
+                    EL_TYPE_E outtype,
+                    EL_PROC_F freedata
+                   ); // return id(chn)
+int el_create_outchn(EL_PROC_F indata, // outchn process indata
+                     EL_TYPE_E intype
+                    );  // return id(chn)
 
 #if defined(__cplusplus)
 }
