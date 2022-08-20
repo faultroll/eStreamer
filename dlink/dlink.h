@@ -58,7 +58,7 @@ typedef int (*DL_PROC_F)(DL_ID_S, DL_DATA_T); // process indata
 
 typedef struct _dl_des_s_ {
     DL_MOD_E mod;            // module enum
-    char        name[16];
+    char     name[16];
     struct {
         DL_SPEED_E  inspeed;     // indata speed, set by user
         DL_TYPE_E   indatatype;  // indata type
@@ -73,6 +73,7 @@ typedef struct _dl_des_s_ {
 } DL_DES_S;
 
 
+// TODO(lgY): add drain-mode
 int dl_init(void);
 int dl_fini(void);
 // link channels

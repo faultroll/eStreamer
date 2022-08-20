@@ -94,7 +94,7 @@ struct _xq_bdl_s_ {
     xq_chn_s *(*new_outchn)(xq_bdl_s *self, const void *param);
     void (*delete_chn)(xq_bdl_s *self, xq_chn_s *chn);
 
-    void *priv; // priv, private data, xq_hnd_s
+    void *priv; // priv, private data, xq_bdl_hnd_s
 };
 
 // TODO(lgY): make this private
@@ -109,7 +109,7 @@ typedef struct _xq_init_s_ {
 int xquant_init(void);
 int xquant_fini(void);
 xq_bdl_s *xquant_new(xq_type_e type, const void *param);
-void xquant_delete(xq_bdl_s *hnd);
+void xquant_delete(xq_bdl_s *bdl);
 void xquant_bind(xq_chn_s *chn1, xq_chn_s *chn2);
 void xquant_unbind(xq_chn_s *chn1, xq_chn_s *chn2);
 
