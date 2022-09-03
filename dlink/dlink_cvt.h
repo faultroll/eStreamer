@@ -34,7 +34,6 @@ typedef enum _dl_enctype_e_ {
 typedef enum _dl_pixelformat_e_ {
     // video
     DL_PIXELFORMAT_YUV420SP,
-    DL_PIXELFORMAT_ARGB1555, // only for OSD
     // audio
     DL_PIXELFORMAT_MONO, // left single
     DL_PIXELFORMAT_STEREO, // left-right packed, current not support

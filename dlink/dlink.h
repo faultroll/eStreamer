@@ -89,6 +89,7 @@ int dl_status(void); // print status
 // modules used by dl_link/dl_unlink
 int dl_create_chn(DL_DES_S *des);
 int dl_destroy_chn(int chn);
+// for convenient
 int dl_create_inchn(DL_GEN_F outdata, // inchn generate outdata
                     DL_TYPE_E outtype,
                     DL_PROC_F freedata
