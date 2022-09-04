@@ -403,10 +403,10 @@ static int __state_judgement(DL_ID_S *from, DL_ID_S *to, map_t *pmap, DL_SEARCH_
     return retval;
 }
 
-// TODO(lgY): combine with __cal_mod_key
+// NOTE(lgY): currently, from and to is not in use, it just like __cal_mod_key
+// TODO(lgY): if we use <mod,chn,grp> to gen key, link logic will be simpled
 static int __cal_link_key(DL_ID_S from, DL_ID_S to)
 {
-    // TODO(lgY): if we use <mod,chn,grp> to gen key, link logic will be simpled
     static ATOMIC_VAR(int) __g_link_key = ATOMIC_VAR_INIT(0 + 1);
 
     // key cannot be 0 in nbds_map

@@ -1,10 +1,10 @@
 
-#ifndef _DLINK_CVT_H_
-#define _DLINK_CVT_H_
+#ifndef _DLINK_CVT_H
+#define _DLINK_CVT_H
 
 #include <stdbool.h>
-#include <stdint.h>
-#include "dlink/dlink.h" // DL_TYPE_E
+#include <stdint.h>  // uintptr_t
+#include "dlink.h" // DL_TYPE_E
 
 #if defined(__cplusplus)
 extern "C" {
@@ -35,13 +35,13 @@ typedef enum _dl_pixelformat_e_ {
     // video
     DL_PIXELFORMAT_YUV420SP,
     // audio
-    DL_PIXELFORMAT_MONO, // left single
-    DL_PIXELFORMAT_STEREO, // left-right packed, current not support
+    DL_PIXELFORMAT_MONO,    // left single
+    DL_PIXELFORMAT_STEREO,  // left-right packed, current not support
 } DL_PIXELFORMAT_E;
 
 typedef enum _dl_bitwidth_e_ {
-    DL_BITWIDTH_8  = 8,    // current video
-    DL_BITWIDTH_10 = 10,   // 10-bit video
+    DL_BITWIDTH_8  = 8,     // current video
+    DL_BITWIDTH_10 = 10,    // 10-bit video
     // DL_BITWIDTH_12 = 12,
     // DL_BITWIDTH_14 = 14,
     DL_BITWIDTH_16 = 16,    // current audio
@@ -51,28 +51,28 @@ typedef enum _dl_bitwidth_e_ {
 
 typedef enum _dl_samplerate_e_ {
     // 48 series
-    DL_SAMPLERATE_8000   = 8000,        /* 8K samplerate*/
-    //DL_SAMPLERATE_12000  = 12000,     /* 12K samplerate*/
-    DL_SAMPLERATE_16000  = 16000,       /* 16K samplerate*/
-    //DL_SAMPLERATE_24000  = 24000,     /* 24K samplerate*/
-    DL_SAMPLERATE_32000  = 32000,       /* 32K samplerate*/
-    DL_SAMPLERATE_48000  = 48000,       /* 48K samplerate*/
-    //DL_SAMPLERATE_64000  = 64000,     /* 64K samplerate*/
-    //DL_SAMPLERATE_96000  = 96000,     /* 96K samplerate*/
+    DL_SAMPLERATE_8000   = 8000,        // 8K samplerate
+    //DL_SAMPLERATE_12000  = 12000,     // 12K samplerate
+    DL_SAMPLERATE_16000  = 16000,       // 16K samplerate
+    //DL_SAMPLERATE_24000  = 24000,     // 24K samplerate
+    DL_SAMPLERATE_32000  = 32000,       // 32K samplerate
+    DL_SAMPLERATE_48000  = 48000,       // 48K samplerate
+    //DL_SAMPLERATE_64000  = 64000,     // 64K samplerate
+    //DL_SAMPLERATE_96000  = 96000,     // 96K samplerate
     // 44.1 series
-    //DL_SAMPLERATE_11025  = 11025,     /* 11.025K samplerate*/
-    //DL_SAMPLERATE_22050  = 22050,     /* 22.050K samplerate*/
-    DL_SAMPLERATE_44100  = 44100,       /* 44.1K samplerate*/
+    //DL_SAMPLERATE_11025  = 11025,     // 11.025K samplerate
+    //DL_SAMPLERATE_22050  = 22050,     // 22.050K samplerate
+    DL_SAMPLERATE_44100  = 44100,       // 44.1K samplerate
 } DL_SAMPLERATE_E;
 
 typedef struct _dl_pub_datainfo_s_ {
     // buffer
-    void        *pVirAddr; // convert to bitwidth (eg. DL_BITWIDTH_16 audio, then use pu16VirAddr)
+    void        *pVirAddr;  // convert to bitwidth (eg. DL_BITWIDTH_16 audio, then use pu16VirAddr)
     uintptr_t    ipPhyAddr;
     uint32_t     u32Len;
     // timestamp
-    uint64_t     u64Pts; // if 0, will be generated in some module
-    uint32_t     u32Seq; // if 0, will be generated in some module
+    uint64_t     u64Pts;    // if 0, will be generated in some module
+    uint32_t     u32Seq;    // if 0, will be generated in some module
     // info
     DL_TYPE_E    enDataType;
     DL_ENCTYPE_E enEncType;
@@ -101,16 +101,16 @@ typedef struct _dl_pub_datainfo_s_ {
 
 
 typedef struct _dl_vframeinfo_s_ {
-    void    *priv;
+    void    *pOpaque;
 } DL_VFRAMEINFO_S;
 typedef struct _dl_vstreaminfo_s_ {
-    void    *priv;
+    void    *pOpaque;
 } DL_VSTREAMINFO_S;
 typedef struct _dl_aframeinfo_s_ {
-    void    *priv;
+    void    *pOpaque;
 } DL_AFRAMEINFO_S;
 typedef struct _dl_astreaminfo_s_ {
-    void    *priv;
+    void    *pOpaque;
 } DL_ASTREAMINFO_S;
 typedef union _dl_priv_datainfo_s_ {
     DL_VFRAMEINFO_S   stVFrameInfo;
@@ -127,4 +127,4 @@ int dlink_cvt_export(/* const */ DL_PRIV_DATAINFO_U *src, DL_PUB_DATAINFO_S *dst
 }
 #endif
 
-#endif // _DLINK_CVT_H_
+#endif // _DLINK_CVT_H

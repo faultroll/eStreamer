@@ -1,6 +1,6 @@
 
-#ifndef _DLINK_H_
-#define _DLINK_H_
+#ifndef _DLINK_H
+#define _DLINK_H
 
 // auto datatransfer between modules
 
@@ -102,4 +102,4 @@ int dl_create_outchn(DL_PROC_F indata, // outchn process indata
 }
 #endif
 
-#endif // _DLINK_H_
+#endif // _DLINK_H
