@@ -40,8 +40,8 @@ struct _xq_chn_s_ {
     int (*get_status)(xq_chn_s *self, void *param);
     int (*custom_ctrl)(xq_chn_s *self, const int oper, void *param); // xq-oper
 
-    xq_chn_s *bind_chn;
-    DL_ID_S bind_id;
+    xq_chn_s *link_chn;
+    DL_ID_S link_id;
     xq_chn_s *target_chn;
     DL_ID_S target_id;
     DL_DES_S des; // indata(send), outdata(get), freedata(release)
@@ -110,8 +110,8 @@ int xquant_init(void);
 int xquant_fini(void);
 xq_bdl_s *xquant_new(xq_type_e type, const void *param);
 void xquant_delete(xq_bdl_s *bdl);
-void xquant_bind(xq_chn_s *chn1, xq_chn_s *chn2);
-void xquant_unbind(xq_chn_s *chn1, xq_chn_s *chn2);
+void xquant_link(xq_chn_s *chn1, xq_chn_s *chn2);
+void xquant_unlink(xq_chn_s *chn1, xq_chn_s *chn2);
 
 #if defined(__cplusplus)
 }

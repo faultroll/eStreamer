@@ -9,9 +9,9 @@
 // map
 #include "nbds/map.h" // lock-free map
 // atomic
-#include "atomic_c.h" // c11 atomic wrapper
+#include "features/atomic_c.h" // c11 atomic wrapper
 // threads
-#include "thread_c.h" // c11 thread
+#include "features/thread_c.h" // c11 thread
 
 
 // TODO(lgY): macros to function

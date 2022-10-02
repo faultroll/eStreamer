@@ -5,7 +5,7 @@
 #include <sched.h>
 #include <string.h>
 
-#include "dlink.h"
+#include "dlink/dlink.h"
 
 #define ARRAY_SIZE(_arr) (sizeof(_arr) / sizeof(_arr[0]))
 

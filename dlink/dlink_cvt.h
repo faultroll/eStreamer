@@ -14,6 +14,14 @@ typedef struct _dl_resolution_s_ {
     uint32_t u32Width;
     uint32_t u32Height;
 } DL_RESOLUTION_S;
+typedef struct _dl_position_s_ {
+    int32_t x;
+    int32_t y;
+} DL_POSITION_S;
+typedef struct _dl_rectangle_s_ {
+    DL_POSITION_S top_left;
+    DL_RESOLUTION_S width_height;
+} DL_RECTANGLE_S;
 
 typedef enum _dl_enctype_e_ {
     // video
@@ -34,9 +42,11 @@ typedef enum _dl_enctype_e_ {
 typedef enum _dl_pixelformat_e_ {
     // video
     DL_PIXELFORMAT_YUV420SP,
+    DL_PIXELFORMAT_VIDEO_BUTT = 100,
     // audio
     DL_PIXELFORMAT_MONO,    // left single
     DL_PIXELFORMAT_STEREO,  // left-right packed, current not support
+    DL_PIXELFORMAT_AUDIO_BUTT = 200,
 } DL_PIXELFORMAT_E;
 
 typedef enum _dl_bitwidth_e_ {
@@ -84,6 +94,8 @@ typedef struct _dl_pub_datainfo_s_ {
         } stVFrameInfo;
         struct {
             bool                   bIsKey;
+            DL_RESOLUTION_S        stSize;
+            uint32_t               u32FrameRate;
         } stVStreamInfo;
         struct {
             DL_PIXELFORMAT_E       enSoundmode;
@@ -95,8 +107,10 @@ typedef struct _dl_pub_datainfo_s_ {
             DL_SAMPLERATE_E        enSampleRate;
             uint32_t               u32PtNumPerFrm;
         } stAStreamInfo;
+        uint8_t                    u8Info[32]; // total
     };
-
+    void        *pUserData; // user manage
+    void        *pPrivData;
 } DL_PUB_DATAINFO_S;
 
 
@@ -118,6 +132,7 @@ typedef union _dl_priv_datainfo_s_ {
     DL_AFRAMEINFO_S   stAFrameInfo;
     DL_ASTREAMINFO_S  stAStreamInfo;
 } DL_PRIV_DATAINFO_U;
+#define DL_DATA_EMPTY    { .pOpaque = NULL, }
 
 int dlink_cvt_import(/* const */ DL_PUB_DATAINFO_S *src, DL_PRIV_DATAINFO_U *dst); // get
 int dlink_cvt_release(DL_PRIV_DATAINFO_U *dst); // release
