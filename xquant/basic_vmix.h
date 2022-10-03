@@ -1,8 +1,8 @@
 
 #include "xquant.h"
 
-#ifndef _BASIC_VIN_H_
-#define _BASIC_VIN_H_
+#ifndef _BASIC_VMIX_H_
+#define _BASIC_VMIX_H_
 
 #if defined(__cplusplus)
 extern "C" {
@@ -12,4 +12,4 @@ extern "C" {
 }
 #endif
 
-#endif /* _BASIC_VIN_H_ */
+#endif /* _BASIC_VMIX_H_ */

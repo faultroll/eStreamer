@@ -18,15 +18,6 @@ typedef enum _xq_chn_type_e_ {
     XQ_CHN_NET,    // farend, encode to net; a/vstream
     XQ_CHN_BYPASS, // ; a/vframe, a/vstream
 } xq_chn_type_e;
-typedef enum _xq_chn_oper_e_ {
-    XQ_OPER_UPDATE_OSD,
-    XQ_OPER_FORCE_IFRAME,
-    XQ_OPER_USRPIC_SET,
-    XQ_OPER_USRPIC_SWITCH,
-    // XQ_OPER_CAPTURE_YUV,
-    // XQ_OPER_EPTZ_CTRL,
-    XQ_OPER_BUTT,
-} xq_chn_oper_e;
 // typedef struct _xq_inchn_hnd_s_ xq_inchn_hnd_s;
 // typedef struct _xq_outchn_hnd_s_ xq_outchn_hnd_s;
 typedef struct _xq_chn_s_ xq_chn_s;
@@ -113,36 +104,56 @@ void xquant_delete(xq_bdl_s *bdl);
 void xquant_link(xq_chn_s *chn1, xq_chn_s *chn2);
 void xquant_unlink(xq_chn_s *chn1, xq_chn_s *chn2);
 
-#if defined(__cplusplus)
-}
-#endif
-
 // common param
 typedef struct _xq_callback_s_ {
     void *opaque;
     int (*dataprocfun)(void *opaque, xq_chn_s *chn, /* const */ DL_PUB_DATAINFO_S *data);
 } xq_callback_s;
 
+// operations
+typedef enum _xq_chn_oper_e_ {
+    XQ_OPER_UPDATE_OSD,
+    XQ_OPER_FORCE_IFRAME,
+    XQ_OPER_USRPIC_SET,
+    XQ_OPER_USRPIC_SWITCH,
+    // XQ_OPER_CAPTURE_YUV,
+    // XQ_OPER_EPTZ_CTRL,
+    XQ_OPER_BUTT,
+} xq_chn_oper_e;
+// XQ_OPER_USRPIC_SET
+typedef struct _xq_usrpic_set_param_s_ {
+    int frame_rate;
+    DL_PUB_DATAINFO_S stUsrPic;
+} xq_usrpic_set_param_s;
+// XQ_OPER_USRPIC_SWITCH
+typedef struct _xq_usrpic_switch_param_s_ {
+    bool enable;
+} xq_usrpic_switch_param_s;
+
+#if defined(__cplusplus)
+}
+#endif
+
 // module param
-/* #include "basic_vin.h"
+#include "basic_vin.h"
 #include "basic_vout.h"
 #include "basic_vmul.h"
 #include "basic_vmix.h"
 #include "basic_venc.h"
 #include "basic_vdec.h"
-#include "basic_ain.h"
-#include "basic_aout.h"
-#include "basic_amul.h"
-#include "basic_amix.h"
-#include "basic_aenc.h"
-#include "basic_adec.h"
-#include "advanced_vin.h"
-#include "advanced_vmulout.h"
-#include "advanced_ain.h"
-#include "advanced_amulout.h"
-#include "business_venc.h"
-#include "business_vdec.h"
-#include "business_aenc.h"
-#include "business_adec.h" */
+// #include "basic_ain.h"
+// #include "basic_aout.h"
+// #include "basic_amul.h"
+// #include "basic_amix.h"
+// #include "basic_aenc.h"
+// #include "basic_adec.h"
+// #include "advanced_vin.h"
+// #include "advanced_vmulout.h"
+// #include "advanced_ain.h"
+// #include "advanced_amulout.h"
+// #include "business_venc.h"
+// #include "business_vdec.h"
+// #include "business_aenc.h"
+// #include "business_adec.h"
 
 #endif // _XQUANT_H_
