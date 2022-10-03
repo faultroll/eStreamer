@@ -15,7 +15,7 @@ static const struct {
     DL_MOD_E src_mod;
     DL_MOD_E dst_mod;
     int (*conv_fun)(const void *, void *);
-} dsp_conv_tbl[] = {
+} param_conv_tbl[] = {
     {DL_VENC, DL_VMUL, __venc_to_vmul},
     {DL_VOUT, DL_VMUL, __vout_to_vmul},
     {DL_VDEC, DL_VMUL, __vdec_to_vmul},
@@ -28,10 +28,10 @@ static const struct {
 int xq_conv(DL_MOD_E src_mod, const void *src_param,
             DL_MOD_E dst_mod, void *dst_param)
 {
-    int i = 0, len = sizeof(dsp_conv_tbl) / sizeof(dsp_conv_tbl[0]);
+    int i = 0, len = sizeof(param_conv_tbl) / sizeof(param_conv_tbl[0]);
     for (; i < len; ++i)
-        if ((src_mod == dsp_conv_tbl[i].src_mod) && (dst_mod == dsp_conv_tbl[i].dst_mod))
-            return dsp_conv_tbl[i].conv_fun(src_param, dst_param);
+        if ((src_mod == param_conv_tbl[i].src_mod) && (dst_mod == param_conv_tbl[i].dst_mod))
+            return param_conv_tbl[i].conv_fun(src_param, dst_param);
 
     return -1;
 }
