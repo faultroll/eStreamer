@@ -25,8 +25,8 @@ static const struct {
     {DL_AOUT, DL_AMUL, __aout_to_vmul},
     {DL_AIN,  DL_AMUL, __ain_to_vmul},
 };
-int dsp_convert(DL_MOD_E src_mod, const void *src_param,
-                DL_MOD_E dst_mod, void *dst_param)
+int xq_conv(DL_MOD_E src_mod, const void *src_param,
+            DL_MOD_E dst_mod, void *dst_param)
 {
     int i = 0, len = sizeof(dsp_conv_tbl) / sizeof(dsp_conv_tbl[0]);
     for (; i < len; ++i)
