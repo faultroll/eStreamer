@@ -62,6 +62,60 @@ extern int xq_vout_destroy(int VoutChn);
 extern int xq_vout_getparam(int VoutChn, xq_vout_param_s *pstVoutChnParam);
 extern int xq_vout_setparam(int VoutChn, const xq_vout_param_s *pstVoutChnParam);
 extern int xq_vout_getstatus(int VoutChn, xq_vout_status_s *pstVoutStatus);
+// AIN
+typedef struct xq_ain_param xq_ain_param_s;
+typedef struct xq_ain_status xq_ain_status_s;
+extern int xq_ain_create(int *pAinChn, const xq_ain_param_s *pstAinChnParam);
+extern int xq_ain_destroy(int AinChn);
+extern int xq_ain_getparam(int AinChn, xq_ain_param_s *pstAinChnParam);
+extern int xq_ain_setparam(int AinChn, const xq_ain_param_s *pstAinChnParam);
+extern int xq_ain_getstatus(int AinChn, xq_ain_status_s *pstAinStatus);
+// AENC
+typedef struct xq_aenc_param xq_aenc_param_s;
+typedef struct xq_aenc_status xq_aenc_status_s;
+extern int xq_aenc_create(int *pAencChn, const xq_aenc_param_s *pstAencChnParam);
+extern int xq_aenc_destroy(int AencChn);
+extern int xq_aenc_getparam(int AencChn, xq_aenc_param_s *pstAencChnParam);
+extern int xq_aenc_setparam(int AencChn, const xq_aenc_param_s *pstAencChnParam);
+extern int xq_aenc_getstatus(int AencChn, xq_aenc_status_s *pstAencStatus);
+// ADEC
+typedef struct xq_adec_param xq_adec_param_s;
+typedef struct xq_adec_status xq_adec_status_s;
+extern int xq_adec_create(int *pAdecChn, const xq_adec_param_s *pstAdecChnParam);
+extern int xq_adec_destroy(int AdecChn);
+extern int xq_adec_getparam(int AdecChn, xq_adec_param_s *pstAdecChnParam);
+extern int xq_adec_setparam(int AdecChn, const xq_adec_param_s *pstAdecChnParam);
+extern int xq_adec_getstatus(int AdecChn, xq_adec_status_s *pstAdecStatus);
+// AMUL
+typedef struct xq_amulgrp_param xq_amulgrp_param_s;
+typedef struct xq_amulchn_param xq_amulchn_param_s;
+typedef struct xq_amulchn_status xq_amulchn_status_s;
+extern int xq_amulgrp_create(int *pAmulGrp, const xq_amulgrp_param_s *pstAmulGrpParam);
+extern int xq_amulgrp_destroy(int AmulGrp);
+extern int xq_amulchn_create(int AmulGrp, int *pAmulChn, const xq_amulchn_param_s *pstAmulGrpParam);
+extern int xq_amulchn_destroy(int AmulGrp, int AmulChn);
+extern int xq_amulchn_getparam(int AmulGrp, int AmulChn, xq_amulchn_param_s *pstAmulGrpParam);
+extern int xq_amulchn_setparam(int AmulGrp, int AmulChn, const xq_amulchn_param_s *pstAmulGrpParam);
+extern int xq_amulchn_getstatus(int AmulGrp, int AmulChn, xq_amulchn_status_s *pstAoutStatus);
+// AMIX
+typedef struct xq_amixgrp_param xq_amixgrp_param_s;
+typedef struct xq_amixchn_param xq_amixchn_param_s;
+typedef struct xq_amixchn_status xq_amixchn_status_s;
+extern int xq_amixgrp_create(int *pAmixGrp, const xq_amixgrp_param_s *pstAmixGrpParam);
+extern int xq_amixgrp_destroy(int AmixGrp);
+extern int xq_amixchn_create(int AmixGrp, int *pAmixChn, const xq_amixchn_param_s *pstAmixGrpParam);
+extern int xq_amixchn_destroy(int AmixGrp, int AmixChn);
+extern int xq_amixchn_getparam(int AmixGrp, int AmixChn, xq_amixchn_param_s *pstAmixGrpParam);
+extern int xq_amixchn_setparam(int AmixGrp, int AmixChn, const xq_amixchn_param_s *pstAmixGrpParam);
+extern int xq_amixchn_getstatus(int AmixGrp, int AmixChn, xq_amixchn_status_s *pstAoutStatus);
+// AOUT
+typedef struct xq_aout_param xq_aout_param_s;
+typedef struct xq_aout_status xq_aout_status_s;
+extern int xq_aout_create(int *pAoutChn, const xq_aout_param_s *pstAoutChnParam);
+extern int xq_aout_destroy(int AoutChn);
+extern int xq_aout_getparam(int AoutChn, xq_aout_param_s *pstAoutChnParam);
+extern int xq_aout_setparam(int AoutChn, const xq_aout_param_s *pstAoutChnParam);
+extern int xq_aout_getstatus(int AoutChn, xq_aout_status_s *pstAoutStatus);
 
 
 int xq_conv(DL_MOD_E src_mod, const void *src_param, DL_MOD_E dst_mod, void *dst_param);
