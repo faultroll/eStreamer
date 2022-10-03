@@ -133,7 +133,7 @@ static int __inchn_create_chn(xq_chn_s *self, const void *param)
     int voutchn;
     xq_vout_param_s *p = (xq_vout_param_s *)param;
     // LOCK_MTX_LOCK(g_mtx_vout);
-    xq_vout_create_chn(&voutchn, p);
+    xq_vout_create(&voutchn, p);
     // LOCK_MTX_UNLOCK(g_mtx_vout);
     h1->vout = (DL_ID_S) {
         .mod = DL_VOUT,
@@ -157,7 +157,7 @@ static int __inchn_destroy_chn(xq_chn_s *self)
 
     // vout
     // LOCK_MTX_LOCK(g_mtx_vout);
-    xq_vout_destroy_chn(h1->vout.chn);
+    xq_vout_destroy(h1->vout.chn);
     // LOCK_MTX_UNLOCK(g_mtx_vout);
 
     return 0;
@@ -172,7 +172,7 @@ static int __inchn_set_param(xq_chn_s *self, const void *param)
     // 1. unlink target
     dl_unlink(c1->link_id, c1->target_id);
     // 2. set param
-    xq_vout_set_chnparam(h1->vout.chn, p);
+    xq_vout_setparam(h1->vout.chn, p);
     // 3. link target
     dl_link(c1->link_id, c1->target_id);
 
@@ -186,7 +186,7 @@ static int __inchn_get_param(xq_chn_s *self, void *param)
 
     xq_vout_param_s *p = (xq_vout_param_s *)param;
     // LOCK_MTX_LOCK(g_mtx_vout);
-    xq_vout_get_chnparam(h1->vout.chn, p);
+    xq_vout_getparam(h1->vout.chn, p);
     // LOCK_MTX_UNLOCK(g_mtx_vout);
     // memcpy(p, &h1->p_vout, sizeof(h1->p_vout));
 
@@ -200,7 +200,7 @@ static int __inchn_get_status(xq_chn_s *self, void *param)
 
     xq_vout_status_s *p = (xq_vout_status_s *)param;
     // LOCK_MTX_LOCK(g_mtx_vout);
-    xq_vout_get_chnstatus(h1->vout.chn, p);
+    xq_vout_getstatus(h1->vout.chn, p);
     // LOCK_MTX_UNLOCK(g_mtx_vout);
 
     return 0;

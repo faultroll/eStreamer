@@ -152,7 +152,7 @@ static int __outchn_create_chn(xq_chn_s *self, const void *param)
     int vinchn;
     xq_vin_param_s *p = (xq_vin_param_s *)param;
     // LOCK_MTX_LOCK(g_mtx_vin);
-    xq_vin_create_chn(&vinchn, p);
+    xq_vin_create(&vinchn, p);
     // LOCK_MTX_UNLOCK(g_mtx_vin);
     h1->vin = (DL_ID_S) {
         .mod = DL_VIN,
@@ -193,7 +193,7 @@ static int __outchn_destroy_chn(xq_chn_s *self)
     dl_destroy_chn(h1->in.chn);
     // vin
     // LOCK_MTX_LOCK(g_mtx_vin);
-    xq_vin_destroy_chn(h1->vin.chn);
+    xq_vin_destroy(h1->vin.chn);
     // LOCK_MTX_UNLOCK(g_mtx_vin);
     // usrpic
     DL_PRIV_DATAINFO_U stPrivDataInfo;
@@ -221,14 +221,14 @@ static int __outchn_set_param(xq_chn_s *self, const void *param)
         dl_link(c1->link_id, c1->target_id);
     } else { // dynamic-param changes
         // LOCK_MTX_UNLOCK(g_mtx_vin);
-        xq_vin_set_chnparam(h1->vin.chn, p);
+        xq_vin_setparam(h1->vin.chn, p);
         // LOCK_MTX_UNLOCK(g_mtx_vin);
     }
 #else // 0
     // 1. unlink target
     dl_unlink(c1->link_id, c1->target_id);
     // 2. set param
-    xq_vin_set_chnparam(h1->vin.chn, p);
+    xq_vin_setparam(h1->vin.chn, p);
     // 3. link target
     dl_link(c1->link_id, c1->target_id);
 #endif // 0
@@ -243,7 +243,7 @@ static int __outchn_get_param(xq_chn_s *self, void *param)
     xq_vin_param_s *p = (xq_vin_param_s *)param;
     // memcpy(p, &h1->p_vin, sizeof(h1->p_vin)); // static-param
     // LOCK_MTX_LOCK(g_mtx_vin);
-    xq_vin_get_chnparam(h1->vin.chn, p); // dynamic-param
+    xq_vin_getparam(h1->vin.chn, p); // dynamic-param
     // LOCK_MTX_UNLOCK(g_mtx_vin);
 
     return 0;
@@ -255,7 +255,7 @@ static int __outchn_get_status(xq_chn_s *self, void *param)
 
     xq_vin_status_s *p = (xq_vin_status_s *)param;
     // LOCK_MTX_LOCK(g_mtx_vin);
-    xq_vin_get_chnstatus(h1->vin.chn, p);
+    xq_vin_getstatus(h1->vin.chn, p);
     // LOCK_MTX_UNLOCK(g_mtx_vin);
 
     return 0;
